@@ -1,3 +1,7 @@
+## Project Members
+- Name: Hoang Viet Do
+- Student ID: i6402289
+
 # Cardio Data Simulator
 
 The Cardio Data Simulator is a Java-based application designed to simulate real-time cardiovascular data for multiple patients. This tool is particularly useful for educational purposes, enabling students to interact with real-time data streams of ECG, blood pressure, blood saturation, and other cardiovascular signals.
