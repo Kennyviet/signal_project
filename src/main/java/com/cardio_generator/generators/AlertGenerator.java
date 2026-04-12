@@ -4,31 +4,48 @@ import java.util.Random;
 
 import com.cardio_generator.outputs.OutputStrategy;
 
+/**
+ * Generates alert data for patients in the simulation.
+ * 
+ * Alerts can be either "triggered" or "resolved" based on probability.
+ * Each patient has an internal alert state that determines whether
+ * an alert is currently active.
+ */
 public class AlertGenerator implements PatientDataGenerator {
 
-    // Constant should be static final and in UPPER_CASE (Google Java Style Guide)
+    /** Random number generator used for simulation */
     public static final Random RANDOM_GENERATOR = new Random();
 
-    // Changed variable name to camelCase (Google Java Style Guide)
-    private final boolean[] alertStates; // false = resolved, true = pressed
+    /** Stores alert state for each patient (true = active, false = resolved) */
+    private final boolean[] alertStates;
 
+    /**
+     * Constructs an AlertGenerator and initializes alert states.
+     *
+     * @param patientCount the number of patients
+     */
     public AlertGenerator(int patientCount) {
-        // Changed variable name to camelCase (Google Java Style Guide)
         alertStates = new boolean[patientCount + 1];
     }
 
+    /**
+     * Generates alert data for a specific patient.
+     * 
+     * If an alert is active, there is a high probability it will be resolved.
+     * If no alert is active, there is a small probability a new alert will be triggered.
+     *
+     * @param patientId the ID of the patient
+     * @param outputStrategy the strategy used to output the generated alert data
+     */
     @Override
     @SuppressWarnings("CallToPrintStackTrace")
     public void generate(int patientId, OutputStrategy outputStrategy) {
         try {
-            // Changed variable name to camelCase (Google Java Style Guide)
             if (alertStates[patientId]) {
 
-                // Added space after 'if' for readability (Google Java Style Guide)
                 if (RANDOM_GENERATOR.nextDouble() < 0.9) { // 90% chance to resolve
                     alertStates[patientId] = false;
 
-                    // Output the alert
                     outputStrategy.output(
                             patientId,
                             System.currentTimeMillis(),
@@ -39,19 +56,14 @@ public class AlertGenerator implements PatientDataGenerator {
 
             } else {
 
-                // Changed variable name to camelCase (Google Java Style Guide)
-                double lambda = 0.1; // Average rate (alerts per period)
+                double lambda = 0.1; // Average rate
+                double p = -Math.expm1(-lambda);
 
-                // Changed variable name to camelCase (Google Java Style Guide)
-                double p = -Math.expm1(-lambda); // Probability of at least one alert
-
-                // Changed variable name to camelCase (Google Java Style Guide)
                 boolean alertTriggered = RANDOM_GENERATOR.nextDouble() < p;
 
                 if (alertTriggered) {
                     alertStates[patientId] = true;
 
-                    // Output the alert
                     outputStrategy.output(
                             patientId,
                             System.currentTimeMillis(),
