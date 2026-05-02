@@ -79,3 +79,21 @@ The diagrams and their accompanying rationale documents can be found in the [uml
 2. Data Storage System
 3. Patient Identification System
 4. Data Access Layer
+
+## Code Coverage Report
+
+### Tests Passing
+All unit tests pass successfully including PatientTest and AlertGeneratorTest.
+
+### Coverage Summary
+- **Patient.java** — getRecords method fully tested including boundary times,
+  empty data, and out of range cases.
+- **AlertGenerator.java** — evaluateData method tested for all alert conditions:
+  critical BP, BP trends, low saturation, rapid saturation drop,
+  hypotensive hypoxemia, and normal values.
+- **Alert.java** — constructor and getters tested.
+
+### Parts Not Tested
+- The console output inside triggerAlert was not assertion-tested
+  as it only prints to System.out.
+- FileDataReader was not tested as it requires actual files on disk.
