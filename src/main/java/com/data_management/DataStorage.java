@@ -109,4 +109,14 @@ public class DataStorage {
             alertGenerator.evaluateData(patient);
         }
     }
+    
+    private static DataStorage instance;
+    
+    public static DataStorage getInstance() {
+    if (instance == null) {
+        instance = new DataStorage();
+    }
+    return instance;
+}
+
 }
