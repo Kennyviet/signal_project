@@ -23,7 +23,7 @@ The Cardio Data Simulator is a Java-based application designed to simulate real-
 ### Installation
 1. Clone the repository:
 ```sh
-   git clone https://github.com/tpepels/signal_project.git
+   git clone https://github.com/Kennyviet/signal_project
 ```
 2. Navigate to the project directory:
 ```sh
